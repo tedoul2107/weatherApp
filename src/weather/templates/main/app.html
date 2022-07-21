@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{% static 'css/mon_style.css' %}">
+</head>
+<body>
+
+
+        <div class="weather-app">
+
+            <div class="container">
+                <h3 class="brand"><a href="" style="text-decoration: none; color:white;">The weather</a> </h3>
+                <div class="city-time">
+                    <h1 class="temp" style="font-size: 10em;">{{temp}}</h1>
+                    <div class="city-name">
+                        <h1 class="name" style="font-size: 4em;">{{name}}</h1>
+                        <small>
+                            <span class="time" style="font-size: 1.7em;">{{timezone|date:"H:i"}}</span>
+                            -
+                            <span class="date" style="font-size: 1.7em;">
+                                {{timezone|date:"D d M Y"}}
+                            </span>
+                        </small>
+                    </div>
+                    <div class="weather">
+                        <img src="http://openweathermap.org/img/w/{{icon}}.png"
+                             alt="icon"
+                             class="icon"
+                             width="100"
+                             height="100"
+                        />
+                        <span class="condition" style="padding-left:15px; font-size: 1.4em;">
+                            {{main}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <form id="locationInput" method="post">
+                    {% csrf_token %}
+                    <input type="text"
+                    class="search" name="city"
+                    placeholder="Search Location..." />
+                    <button type="submit" class="submit">
+                        <i class="fa fa-search">
+                            <img src="{% static 'images/search.png' %}"
+                                 width="30"
+                                 height="30"
+                                 alt="">
+                        </i>
+                    </button>
+                </form>
+
+                <ul class="cities">
+                    <li class="city">Yaoundé</li>
+                    <li class="city">New York</li>
+                    <li class="city">Paris</li>
+                    <li class="city">Tokyo</li>
+                </ul>
+
+                <ul class="details">
+                    <h4>Weather Details</h4>
+                    <li>
+                        <span>Country Code</span>
+                        <span class="cc">{{country_code}}</span>
+                    </li>
+                    <li>
+                        <span>Humidity</span>
+                        <span class="humidity">{{humidity}}%</span>
+                    </li>
+                    <li>
+                        <span>Pressure</span>
+                        <span class="pressure">{{pressure}}</span>
+                    </li>
+                    <li>
+                        <span>Wind</span>
+                        <span class="wind">{{wind}}km/h</span>
+                    </li>
+                    <li>
+                        <span>Description</span>
+                        <span class="description">{{description}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+</body>
+</html>
